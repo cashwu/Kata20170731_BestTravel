@@ -73,12 +73,16 @@ namespace Kata20170731_BestTravel
             }
             else if (visitCount == 2)
             {
-                choose = new []
+                var result = new List<int>();
+                for (int i = 0; i < listOfDistance.Count; i++)
                 {
-                    listOfDistance[0] + listOfDistance[1],
-                    listOfDistance[0] + listOfDistance[2],
-                    listOfDistance[1] + listOfDistance[2]
-                }.OrderByDescending(a => a).FirstOrDefault(a => maxDistance >= a);
+                    for (int j = 0; j < listOfDistance.Count; j++)
+                    {
+                        result.Add(listOfDistance[i] + listOfDistance[j]);
+                    }
+                }
+
+                choose = result.Distinct().OrderByDescending(a => a).FirstOrDefault(a => maxDistance >= a);
             }
 
             return choose == 0 ? default(int?) : choose;

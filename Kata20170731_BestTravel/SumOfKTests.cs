@@ -19,6 +19,12 @@ namespace Kata20170731_BestTravel
             AssertShooseBestSum(16, 1, new List<int> { 20, 15 }, 15);
         }
 
+        [TestMethod]
+        public void input_distance_20_visit_1_ls_20_15_should_return_20()
+        {
+            AssertShooseBestSum(20, 1, new List<int> { 20, 15 }, 20);
+        }
+
         private static void AssertShooseBestSum(int maxDistance, int visitCount, List<int> listOfDistance, int? expected)
         {
             var sumOfk = new SumOfK();
@@ -31,7 +37,7 @@ namespace Kata20170731_BestTravel
     {
         public int? chooseBestSum(int maxDistance, int visitCount, List<int> listOfDistance)
         {
-            int? choose = listOfDistance.FirstOrDefault(a => maxDistance > a);
+            int? choose = listOfDistance.FirstOrDefault(a => maxDistance >= a);
             return choose == 0 ? default(int?) : choose;
         }
     }

@@ -49,6 +49,12 @@ namespace Kata20170731_BestTravel
             AssertShooseBestSum(31, 2, new List<int> { 20, 15, 10 }, 30);
         }
 
+        [TestMethod]
+        public void input_distance_31_visit_2_ls_20_15_10_12_should_return_30()
+        {
+            AssertShooseBestSum(31, 2, new List<int> { 20, 15, 10, 12 }, 30);
+        }
+
         private static void AssertShooseBestSum(int maxDistance, int visitCount, List<int> listOfDistance, int? expected)
         {
             var sumOfk = new SumOfK();

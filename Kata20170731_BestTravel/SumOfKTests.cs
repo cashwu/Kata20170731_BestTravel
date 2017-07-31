@@ -66,26 +66,33 @@ namespace Kata20170731_BestTravel
                 return (listOfDistance.Sum() > maxDistance) ? default(int?) : listOfDistance.Sum();
             }
 
-            int? choose = null;
+            int? choose = AllVisitChoice(listOfDistance, visitCount)
+                            .Distinct()
+                            .OrderByDescending(a => a)
+                            .FirstOrDefault(a => maxDistance >= a);
+
+            return choose == 0 ? default(int?) : choose;
+        }
+
+        private static IEnumerable<int> AllVisitChoice(List<int> listOfDistance, int visitCount)
+        {
             if (visitCount == 1)
             {
-                choose = listOfDistance.FirstOrDefault(a => maxDistance >= a);
+                foreach (var a in listOfDistance)
+                {
+                    yield return a;
+                }
             }
             else if (visitCount == 2)
             {
-                var result = new List<int>();
-                for (int i = 0; i < listOfDistance.Count; i++)
+                foreach (int a in listOfDistance)
                 {
-                    for (int j = 0; j < listOfDistance.Count; j++)
+                    foreach (int b in listOfDistance)
                     {
-                        result.Add(listOfDistance[i] + listOfDistance[j]);
+                        yield return a + b;
                     }
                 }
-
-                choose = result.Distinct().OrderByDescending(a => a).FirstOrDefault(a => maxDistance >= a);
             }
-
-            return choose == 0 ? default(int?) : choose;
         }
     }
 }
